@@ -31,9 +31,29 @@ const teacher2: Teacher = {
   fullTimeEmployee: false,
   yearsOfExperience: 2,
   location: 'Boston',
-  contract: false,                   // extra boolean
+  contract: false,                    // extra boolean
   skills: ['JavaScript', 'TypeScript'] // extra array
 };
 
 // 4. Use them however you like
 console.log(teacher1, teacher2);
+
+// 5. Define the Directors interface extending Teacher
+interface Directors extends Teacher {
+  numberOfReports: number;
+}
+
+// 6. Create an example director
+const director1: Directors = {
+  firstName: 'Ellen',
+  lastName: 'Ripley',
+  fullTimeEmployee: true,
+  location: 'New York',
+  numberOfReports: 12,               // required by Directors
+};
+
+// thanks to the inherited index signature you can still add extras:
+director1.department = 'Engineering';
+
+// 7. Log the director
+console.log(director1);
