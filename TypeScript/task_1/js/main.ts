@@ -57,3 +57,15 @@ director1.department = 'Engineering';
 
 // 7. Log the director
 console.log(director1);
+
+// 8. Define the interface for the printTeacher function
+interface printTeacherFunction {
+  (firstName: string, lastName: string): string;
+}
+
+// 9. Implement printTeacher using that interface
+const printTeacher: printTeacherFunction = (firstName, lastName) =>
+  `${firstName.charAt(0)}. ${lastName}`;
+
+// 10. Example usage
+console.log(printTeacher('John', 'Doe')); // J. Doe
