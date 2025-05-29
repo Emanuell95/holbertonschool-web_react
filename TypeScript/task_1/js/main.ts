@@ -1,6 +1,6 @@
 // js/main.ts
 
-// 1. Define the Teacher interface
+//Define the Teacher interface
 interface Teacher {
   readonly firstName: string;           // can only be set at init
   readonly lastName: string;            // can only be set at init
@@ -12,7 +12,7 @@ interface Teacher {
   [key: string]: any;
 }
 
-// 2. Create an example teacher and add a 'contract' property
+//Create an example teacher and add a 'contract' property
 const teacher1: Teacher = {
   firstName: 'Sarah',
   lastName: 'Connor',
@@ -24,26 +24,26 @@ const teacher1: Teacher = {
 teacher1.contract = true;
 teacher1.subject = 'Computer Science';
 
-// 3. Or define with extras inline:
+//Or define with extras inline:
 const teacher2: Teacher = {
   firstName: 'Kyle',
   lastName: 'Reese',
   fullTimeEmployee: false,
   yearsOfExperience: 2,
   location: 'Boston',
-  contract: false,                    // extra boolean
+  contract: false,                     // extra boolean
   skills: ['JavaScript', 'TypeScript'] // extra array
 };
 
-// 4. Use them however you like
+//Use them however you like
 console.log(teacher1, teacher2);
 
-// 5. Define the Directors interface extending Teacher
+// Define the Directors interface extending Teacher
 interface Directors extends Teacher {
   numberOfReports: number;
 }
 
-// 6. Create an example director
+//Create an example director
 const director1: Directors = {
   firstName: 'Ellen',
   lastName: 'Ripley',
@@ -55,17 +55,51 @@ const director1: Directors = {
 // thanks to the inherited index signature you can still add extras:
 director1.department = 'Engineering';
 
-// 7. Log the director
+// Log the director
 console.log(director1);
 
-// 8. Define the interface for the printTeacher function
+//Define the interface for the printTeacher function
 interface printTeacherFunction {
   (firstName: string, lastName: string): string;
 }
 
-// 9. Implement printTeacher using that interface
+//Implement printTeacher using that interface
 const printTeacher: printTeacherFunction = (firstName, lastName) =>
   `${firstName.charAt(0)}. ${lastName}`;
 
-// 10. Example usage
+//Example usage
 console.log(printTeacher('John', 'Doe')); // J. Doe
+
+
+
+// Describe the StudentClass constructor signature…
+interface StudentClassConstructor {
+  new (firstName: string, lastName: string): StudentClassInterface;
+}
+
+//  …and the StudentClass instance interface
+interface StudentClassInterface {
+  workOnHomework(): string;
+  displayName(): string;
+}
+
+// Implement StudentClass to match those two interfaces
+class StudentClass implements StudentClassInterface {
+  constructor(public firstName: string, public lastName: string) {}
+
+  workOnHomework(): string {
+    return 'Currently working';
+  }
+
+  displayName(): string {
+    return this.firstName;
+  }
+}
+
+// (Optional) enforce the constructor signature by typing the class itself
+const StudentCreator: StudentClassConstructor = StudentClass;
+
+//Example usage
+const student = new StudentCreator('Jane', 'Doe');
+console.log(student.workOnHomework()); // Currently working
+console.log(student.displayName());    // Jane
