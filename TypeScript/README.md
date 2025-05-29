@@ -1,0 +1,1 @@
+In this project I am working with TypeScript which is important as a complement to JavaScript. 
