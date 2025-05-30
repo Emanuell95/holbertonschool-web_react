@@ -1,6 +1,6 @@
 "use strict";
 // interfaces.ts
-// 3. Class Director implements DirectorInterface
+// 3. Director class
 var Director = /** @class */ (function () {
     function Director() {
     }
@@ -15,7 +15,7 @@ var Director = /** @class */ (function () {
     };
     return Director;
 }());
-// 4. Class Teacher implements TeacherInterface
+// 4. Teacher class
 var Teacher = /** @class */ (function () {
     function Teacher() {
     }
@@ -39,8 +39,20 @@ function createEmployee(salary) {
         return new Director();
     }
 }
-// Example usage
-console.log(createEmployee(200)); // Teacher
-console.log(createEmployee(1000)); // Director
-console.log(createEmployee('$500')); // Director
+// 6. isDirector - Type Predicate
+function isDirector(employee) {
+    return employee instanceof Director;
+}
+// 7. executeWork function
+function executeWork(employee) {
+    if (isDirector(employee)) {
+        return employee.workDirectorTasks();
+    }
+    else {
+        return employee.workTeacherTasks();
+    }
+}
+// ✅ Example usage:
+console.log(executeWork(createEmployee(200))); // Getting to work
+console.log(executeWork(createEmployee(1000))); // Getting to director tasks
 //# sourceMappingURL=main.js.map
