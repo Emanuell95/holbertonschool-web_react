@@ -1,20 +1,20 @@
 // interfaces.ts
 
-// 1. DirectorInterface with 3 methods
+// 1. DirectorInterface
 interface DirectorInterface {
   workFromHome(): string;
   getCoffeeBreak(): string;
   workDirectorTasks(): string;
 }
 
-// 2. TeacherInterface with 3 methods
+// 2. TeacherInterface
 interface TeacherInterface {
   workFromHome(): string;
   getCoffeeBreak(): string;
   workTeacherTasks(): string;
 }
 
-// 3. Class Director implements DirectorInterface
+// 3. Director class
 class Director implements DirectorInterface {
   workFromHome(): string {
     return 'Working from home';
@@ -29,7 +29,7 @@ class Director implements DirectorInterface {
   }
 }
 
-// 4. Class Teacher implements TeacherInterface
+// 4. Teacher class
 class Teacher implements TeacherInterface {
   workFromHome(): string {
     return 'Cannot work from home';
@@ -53,7 +53,20 @@ function createEmployee(salary: number | string): Teacher | Director {
   }
 }
 
-// Example usage
-console.log(createEmployee(200)); // Teacher
-console.log(createEmployee(1000)); // Director
-console.log(createEmployee('$500')); // Director
+// 6. isDirector - Type Predicate
+function isDirector(employee: Teacher | Director): employee is Director {
+  return employee instanceof Director;
+}
+
+// 7. executeWork function
+function executeWork(employee: Teacher | Director): string {
+  if (isDirector(employee)) {
+    return employee.workDirectorTasks();
+  } else {
+    return employee.workTeacherTasks();
+  }
+}
+
+// ✅ Example usage:
+console.log(executeWork(createEmployee(200)));   // Getting to work
+console.log(executeWork(createEmployee(1000)));  // Getting to director tasks
