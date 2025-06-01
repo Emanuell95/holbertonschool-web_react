@@ -85,3 +85,18 @@ function teachClass(todayClass: Subjects): string {
 // ✅ Example usage
 console.log(teachClass('Math'));     // Teaching Math
 console.log(teachClass('History'));  // Teaching History
+
+// 8. String literal type
+type Subjects = 'Math' | 'History';
+
+// 9. teachClass function
+function teachClass(todayClass: Subjects): string {
+  if (todayClass === 'Math') {
+    return 'Teaching Math';
+  }
+  return 'Teaching History';
+}
+
+// ✅ Example usage
+console.log(teachClass('Math'));     // Teaching Math
+console.log(teachClass('History'));  // Teaching History
